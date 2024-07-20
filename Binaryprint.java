@@ -1,4 +1,4 @@
-public class Binaryprint {
+public class BinaryPrint {
 
 	// 打印一个int类型的数字，32位进制的状态
 	// 左侧是高位，右侧是低位
