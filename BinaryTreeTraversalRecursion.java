@@ -25,9 +25,9 @@ public class BinaryTreeTraversalRecursion {
 			return;
 		}
 		
-		preOrder(head.left);
+		inOrder(head.left);
 		System.out.print(head.val + " ");
-		preOrder(head.right);
+		inOrder(head.right);
 	}
 	
 	public static void posOrder(TreeNode head) {
@@ -35,8 +35,8 @@ public class BinaryTreeTraversalRecursion {
 			return;
 		}
 		
-		preOrder(head.left);
-		preOrder(head.right);
+		posOrder(head.left);
+		posOrder(head.right);
 		System.out.print(head.val + " ");
 	}
 	
