@@ -71,6 +71,27 @@ public class BinaryTreeTraversalIteration {
 		}
 	}
 	
+	public static void posOrderByOneStack(TreeNode head) {
+		if(head != null) {
+			Stack<TreeNode> order = new Stack<TreeNode>();
+			order.push(head);
+			while(!order.empty()) {
+				TreeNode cur = order.peek();
+				if(cur.left != null && head != cur.left && head != cur.right) {
+					order.push(cur.left);
+				}
+				else if(cur.right != null && head != cur.right) {
+					order.push(cur.right);
+				}
+				else {
+					System.out.print(cur.val + " ");
+					head = order.pop();
+				}
+			}
+			System.out.println();
+		}
+	}
+	
 	public static void main(String[] args) {
 		TreeNode head = new TreeNode(1);
 		head.left = new TreeNode(2);
@@ -83,5 +104,6 @@ public class BinaryTreeTraversalIteration {
 		preOrder(head);
 		inOrder(head);
 		posOrderByTwoStack(head);
+		posOrderByOneStack(head);
 	}
 }
