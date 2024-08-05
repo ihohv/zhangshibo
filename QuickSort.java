@@ -1,38 +1,15 @@
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.io.StreamTokenizer;
+import java.io.BufferedReader;
 
 public class QuickSort {
 
-	public static int MAXN = 100001;
-
-	public static int[] arr = new int[MAXN];
-
+	public static int MAX_INIT = 100001;
+	public static int[] arr = new int[MAX_INIT];
 	public static int n;
-
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		for (int i = 0; i < n; i++) {
-			in.nextToken();
-			arr[i] = (int) in.nval;
-		}
-		quickSort2(0, n - 1);
-		for (int i = 0; i < n - 1; i++) {
-			out.print(arr[i] + " ");
-		}
-		out.println(arr[n - 1]);
-		out.flush();
-		out.close();
-		br.close();
-	}
-
 
 	public static void quickSort1(int l, int r) {
 		if (l >= r) {
@@ -45,25 +22,28 @@ public class QuickSort {
 	}
 
 	public static int partition1(int l, int r, int x) {
-		int a = l, xi = 0;
+		int a = l, ax = 0;
 		for (int i = l; i <= r; i++) {
 			if (arr[i] <= x) {
 				swap(a, i);
 				if (arr[a] == x) {
-					xi = a;
+					ax = a;
 				}
 				a++;
 			}
 		}
-		swap(xi, a - 1);
+		swap(a - 1, ax);
 		return a - 1;
 	}
 
-	public static void swap(int i, int j) {
-		int tmp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = tmp;
+	public static void swap(int a, int b) {
+		int tem = arr[a];
+		arr[a] = arr[b];
+		arr[b] = tem;
 	}
+
+	public static int first;
+	public static int last;
 
 	public static void quickSort2(int l, int r) {
 		if (l >= r) {
@@ -77,22 +57,38 @@ public class QuickSort {
 		quickSort2(right + 1, r);
 	}
 
-	// 荷兰国旗问题
-	public static int first, last;
-
 	public static void partition2(int l, int r, int x) {
 		first = l;
 		last = r;
-		int i = l;
-		while (i <= last) {
-			if (arr[i] == x) {
-				i++;
-			} else if (arr[i] < x) {
-				swap(first++, i++);
+		int a = l;
+		while (a <= last) {
+			if (arr[a] < x) {
+				swap(first++, a++);
+			} else if (arr[a] == x) {
+				a++;
 			} else {
-				swap(i, last--);
+				swap(a, last--);
 			}
 		}
 	}
 
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer in = new StreamTokenizer(br);
+		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+		in.nextToken();
+		n = (int) in.nval;
+		for (int i = 0; i < n; i++) {
+			in.nextToken();
+			arr[i] = (int) in.nval;
+		}
+		quickSort1(0, n - 1);
+		for (int i = 0; i < n - 1; i++) {
+			out.print(arr[i] + " ");
+		}
+		out.println(arr[n - 1]);
+		out.flush();
+		out.close();
+		br.close();
+	}
 }
