@@ -1,4 +1,11 @@
 public class HeapSort {
+	
+	public static int[] sortArray(int[] nums) {
+		if (nums.length > 1) {
+			heapSort2(nums);
+		}
+		return nums;
+	}
 
 	public static void heapInsert(int[] arr, int i) {
 		while (arr[i] > arr[(i - 1) / 2]) {
@@ -10,7 +17,7 @@ public class HeapSort {
 	public static void heapify(int[] arr, int i, int size) {
 		int l = i * 2 + 1;
 		while (l < size) {
-			int best = l + 1 < size && arr[l] > arr[l + 1] ? l : l + 1;
+			int best = l + 1 < size && arr[l + 1] > arr[l] ? l + 1 : l;
 			best = arr[best] > arr[i] ? best : i;
 			if (best == i) {
 				break;
